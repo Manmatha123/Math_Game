@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I_love_Math</title>
+    <style>
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.center{
+    height: 100vh;
+    width: 100vw;
+    text-align: center;
+   display: flex;
+   justify-content: center;align-items: center;
+flex-direction: column;
+    background:linear-gradient(45deg,deeppink,orange,blue);
+background: #e0ffff;
+}
+.gameplace{
+    height: 350px;
+    width: 250px;
+  display: grid;background: #fff;
+overflow: hidden;
+    /* border: 1.3px solid black; */
+    border-radius: 8px;
+    box-shadow:0px -5px 10px 0px rgba(0,0,0,0.5);
+
+    box-shadow: rgba(0, 0, 0, 0.7) 0px 5px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+
+
+}
+#head{
+    height:40px;
+    display: flex;
+    background-color: transparent;
+
+    box-shadow:0px -5px 10px 0px rgba(0,0,0,0.5)
+}
+#show{
+    height: 100%;
+    width: 70%;
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    border-left: none;
+    display: grid;
+align-items: center;
+color: wblackhite;
+font-size: 30px;
+}
+#input{
+    color: black;
+    width: 30%;
+    outline: none;
+    /* border: 1px solid; */
+    display: grid;
+    
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+
+align-items: center;
+border-bottom: none;
+font-size: 30px;
+border-top: none;
+}
+.btmrow1{
+    border-top: 1.3px solid;padding: 5px;
+    cursor:pointer;
+    width: 100%;
+    display: flex;
+
+}
+.btm{
+    height: 70px;
+    width:50%;
+    box-shadow:0px -5px 10px 0px rgba(0,0,0,0.5);
+
+    text-align: center;
+    color: black;
+margin: 2px 10px 0px 13px;
+border-radius: 10px;
+text-align: center;
+display: grid;
+align-items: center;
+font-size: 30px;
+}
+
+.btmrow2{
+   
+ margin-top: 15px;
+    width: 100%;
+    display: flex;
+    cursor:pointer;
+
+}
+#win{
+
+
+border-top:none ;
+    height: 40px;
+    position: relative;
+    top: 0px;
+    font-size: 23px;
+text-align: center;
+    color: black;
+    text-shadow:3px 1px 1px black;
+}
+
+h2{
+    font-size:40px;
+    position: relative;
+
+    color: black;top: -10px;
+    -webkit-text-stroke:0.03vw yellow;
+    overflow: hidden;
+
+
+   z-index:2;
+
+}
+h2::before{
+    content: "";
+    position: absolute;
+    width:120%;
+ 
+    height: 120%;
+    background: linear-gradient(90deg,transparent 0%,#e0ffff 5%,#e0ffff 100%);
+    animation:w1 4.8s linear  infinite ;
+    animation-delay:0s;
+    z-index: 2;
+    
+}
+h2 span{
+    color: red;
+}
+@keyframes w1{
+  0%{
+      left:-50%;
+    }
+    
+    50%{
+     left: 20%;   
+    }
+    
+    50%{
+     left: 50%;   
+    }
+    100%{
+left:110%;
+    }
+    
+}
+
+
+    </style>
+</head>
+<body>
+    <div class="center">
+
+        <!-- VID_20230303_184246.mp4 -->
+            <!-- <video id="videoid"class="videotag" src="VID_20230303_184246.mp4"type="video/mp4" autoplay   muted="">
+                <source src="fire_VFX_red._mp4(1080p).mp4"type="video/mp4"></video> -->
+            
+        <h2><span id="spantag">I_</span>Love_<span>M</span>ath_.<span>.</span>.<span>.</span>.<span>.</span></h2>
+
+        <div class="gameplace">
+            <div id="head">
+<span id="show"></span>
+<span type="text" id="input"></span>
+
+            </div>
+            <span id="win"></span>
+<div class="btmpart">
+    <div class="btmrow1">
+        <span class="btm" id="btm1"></span>
+        <span class="btm" id="btm2"></span></div>
+
+ 
+<div class="btmrow2">
+    <span class="btm" id="btm3"></span>
+    <span class="btm" id="btm4"></span>
+</div> 
+</div>
+
+        </div>
+
+
+    </div>
+
+<script>
+var count=0;
+var wincount=0;
+var show=document.getElementById('show');
+var input=document.getElementById('input');
+var btm1=document.getElementById('btm1');
+var btm2=document.getElementById('btm2');
+var btm3=document.getElementById('btm3');
+var btm4=document.getElementById('btm4');
+var win=document.getElementById('win');
+
+var num1=Math.floor(Math.random()*10);
+var num2=(Math.floor(Math.random()*10)+1);
+// console.log(num1);
+
+var sign=Math.floor(Math.random()*4);
+var data=['+','-','*','%'][sign];
+var res;
+
+var sbtm=Math.floor(Math.random()*4);
+var bdata=['0','1','2','3'][sbtm];
+
+switch(data)
+{
+    case '+':
+        res=num1+num2
+        break;
+        
+    case '*':
+        res=num1*num2
+        break;
+        
+    case '-':
+        res=num1-num2
+        break;
+        
+    case '%':
+        res=num1%num2
+        break;
+}
+
+show.innerText=num1+ data +num2;
+
+switch(bdata)
+{
+    case '0':
+     
+btm1.innerText=res;
+btm2.innerText=res-2;
+btm3.innerText=res+1;
+btm4.innerText=res-1;
+
+        break;
+
+    case '1':
+    btm1.innerText=res+1;
+btm2.innerText=res;
+btm3.innerText=res-1;
+btm4.innerText=res-2;
+        break;
+        
+    case '2':
+      
+btm1.innerText=res-2;
+btm2.innerText=res+1;
+btm3.innerText=res;
+btm4.innerText=res-1;
+        break;
+        
+    case '3':
+            
+btm1.innerText=res-1;
+btm2.innerText=res+1;
+btm3.innerText=res-2;
+btm4.innerText=res;
+        break;
+}
+
+
+var s=document.querySelector('.btmpart');
+
+s.addEventListener('click',(e)=>{
+
+    creatTags(e.target.innerText)
+ 
+})
+
+function  creatTags(val){
+   
+
+    input.innerText=val;
+  
+    if(count<=10){
+      
+if(res==val){
+s.style.background='lime'
+count=count+1;
+wincount=wincount+1;
+
+win.innerText=`score is:( 10/${wincount})`
+
+ sign=Math.floor(Math.random()*4);
+ data=['+','-','*','%'][sign];
+
+ sbtm=Math.floor(Math.random()*4);
+ bdata=['0','1','2','3'][sbtm];
+
+num1=Math.floor(Math.random()*10);
+ num2=Math.floor(Math.random()*10)+1;
+
+
+switch(data)
+{
+    case '+':
+        res=num1+num2
+        break;
+        
+    case '*':
+        res=num1*num2
+        break;
+        
+    case '-':
+        res=num1-num2
+        break;
+        
+    case '%':
+        res=num1%num2
+        break;
+}
+
+show.innerText=num1+ data +num2;
+ 
+switch(bdata)
+{
+    case '0':
+     
+btm1.innerText=res;
+btm2.innerText=res-2;
+btm3.innerText=res+1;
+btm4.innerText=res-1;
+
+        break;
+
+    case '1':
+    btm1.innerText=res+1;
+btm2.innerText=res;
+btm3.innerText=res-1;
+btm4.innerText=res-2;
+        break;
+        
+    case '2':
+      
+btm1.innerText=res-1;
+btm2.innerText=res+1;
+btm3.innerText=res;
+btm4.innerText=res-2;
+        break;
+        
+    case '3':
+            
+btm1.innerText=res-2;
+btm2.innerText=res+1;
+btm3.innerText=res-1;
+btm4.innerText=res;
+        break;
+}
+
+
+}
+
+
+else{
+    s.style.background='red'
+    count=count+1;
+
+sign=Math.floor(Math.random()*4);
+data=['+','-','*','%'][sign];
+
+ sbtm=Math.floor(Math.random()*4);
+bdata=['0','1','2','3'][sbtm];
+
+ num1=Math.floor(Math.random()*10);
+ num2=Math.floor(Math.random()*10)+1;
+
+ switch(data)
+{
+    case '+':
+        res=num1+num2
+        break;
+        
+    case '*':
+        res=num1*num2
+        break;
+        
+    case '-':
+        res=num1-num2
+        break;
+        
+    case '%':
+        res=num1%num2
+        break;
+}
+
+show.innerText=num1+ data +num2;
+
+switch(bdata)
+{
+    case '0':
+     
+btm1.innerText=res;
+btm2.innerText=res-2;
+btm3.innerText=res+1;
+btm4.innerText=res-1;
+
+        break;
+
+    case '1':
+    btm1.innerText=res+1;
+btm2.innerText=res;
+btm3.innerText=res-2;
+btm4.innerText=res-1;
+        break;
+        
+    case '2':
+      
+btm1.innerText=res-2;
+btm2.innerText=res+1;
+btm3.innerText=res;
+btm4.innerText=res-1;
+        break;
+        
+    case '3':
+            
+btm1.innerText=res-2;
+btm2.innerText=res+1;
+btm3.innerText=res-1;
+btm4.innerText=res;
+        break;
+}
+
+
+}
+
+}
+
+
+ if(count>=10){
+alert("game is over");
+s.style.background='';
+input.innerText="";
+count=0;
+
+win.innerText=`Hurray your score is ${wincount}`;
+
+
+wincount=0;
+}
+
+}
+
+</script>
+    
+</body>
+</html>
